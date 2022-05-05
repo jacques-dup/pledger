@@ -1,0 +1,173 @@
+:root {
+  --primary-text: #1a1a1a;
+  --primary-teal: #9AB4AF;
+  --primary-blue: #A0B7C1;
+  --background-light: #DDDAD5;
+  --background-dark: #595959;
+} 
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.header a {
+  color: var(--primary-blue) !important;
+}
+
+.container {
+  max-width: 50em;
+  margin:auto;
+  padding: 2em 1em;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e6e6e6;
+  margin-bottom: 60px;
+}
+
+.header ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.header ul li{
+  margin: 0 0.1em;
+}
+
+.header ul li svg {
+  margin-right: 0.3em;
+}
+
+.header ul li a {
+  display: flex;
+  align-items: center;
+  font-size: small;
+}
+
+.card.auth {
+  display: flex;
+  flex-direction: column;
+  padding:2em !important;
+  align-items: center;
+  text-align-last: center;
+  margin: auto !important;
+}
+
+.card.auth form * {
+  margin-bottom: 0.75em;
+}
+
+.item {
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item .item-pledge {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.item .item-pledge .progress {
+  flex-grow: 2;
+  margin-right: 0.5em !important;
+  margin-bottom: 0.5em !important;
+}
+
+.item button {
+  height: 1.76em;
+  padding: 0.5em !important;
+}
+.item button svg {
+  height: 0.75em;
+}
+
+button.primary {
+  background: var(--primary-blue) !important;
+}
+button.secondary {
+  background: var(--background-dark) !important;
+}
+
+.progress .bar {
+  background: var(--primary-blue) !important;
+}
+
+.edit-item {
+  position: absolute !important;
+  right:0;
+  z-index: 10;
+  padding: 0.5em !important;
+  background-color: var(--background-light) !important;
+}
+
+.edit-item span {
+  position: absolute;
+  right:0.5em;
+  height: 1em;
+  width: 1em;
+  padding: 0;
+}
+
+.form-group.edit-form {
+  display:flex;
+  flex-direction: row;
+  align-items: baseline;
+  padding-top:0.5em;
+  
+}
+.edit-form input {
+  margin-right: 0.5em !important;
+  height: 1.8em;
+  padding: 0.75em 0 0.75em 1em !important;
+}
+
+.edit-form input#newPledge, .edit-form input#total_needed{
+  width: 5em !important;
+}
+.edit-form button {
+  flex-grow: 2;
+}
+
+.hide {
+  display:none !important;
+}
+
+.item-heading {
+  background: var(--background-dark);
+  border-radius: 0.2em;
+  padding: 0.2em 0.5em;
+  color: white;
+}
+
+.home-header {
+  margin-bottom: 5em !important;
+  padding: 0.5em !important;
+}
+
+.form.heading p {
+  text-align: justify;
+}

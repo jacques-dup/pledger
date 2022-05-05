@@ -1,0 +1,29 @@
+{
+  "name": "pledger-server",
+  "version": "1.0.0",
+  "description": "PLedger Server",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "nodemon server/server.js"
+  },
+  "keywords": [],
+  "author": "Jacques du Plessis",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.1.0",
+    "nodemon": "^2.0.16"
+  }
+}
