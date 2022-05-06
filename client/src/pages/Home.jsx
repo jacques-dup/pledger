@@ -78,6 +78,7 @@ export const Home = () => {
                         items.map((item, index) => {
 
                             const hasExistingPledge = pledges.find(pledge => pledge.item === item._id)
+                            const allPledged = item.total_pledged === item.total_needed
 
                             return (
                                 <Item data={item} key={item._id}> 
@@ -86,7 +87,7 @@ export const Home = () => {
                                             className="ui primary button" 
                                             id={`pledge-${index}`} 
                                             onClick={onClickPledge}
-                                            disabled={hasExistingPledge ? true : false}>
+                                            disabled={hasExistingPledge || allPledged ? true : false}>
                                                 <FaHeart/> {hasExistingPledge ? 'Pledged' : 'Pledge'}
                                         </button>
                                         <EditPledgePopup 
