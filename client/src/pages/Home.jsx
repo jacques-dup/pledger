@@ -70,7 +70,7 @@ export const Home = () => {
                 <h3>The items below reflect what is still needed for the CGD Community camp. To pledge, please click the pledge button. You will be required to enter your email so that we can follow up.</h3>
                 <div className="ui card fluid home-header">
                     <h1>Total Progress:</h1>
-                    <ProgressBar current={totals.current} total={totals.total} size="big" />
+                    <ProgressBar current={totals.current} total={totals.total} size="big" type="progress" />
                 </div>
             
                 <ul>
