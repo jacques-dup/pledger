@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import { Home, Admin, Login, MyPledges, Register } from './pages';
-import { Header } from './components/Header';
+import { Header, ManagePledgesList } from './components';
+import { PrintPage } from './pages/PrintPage';
 
 export const App = () => {
   return (
@@ -19,6 +20,11 @@ export const App = () => {
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>
+        <Routes>
+          <Route path="/print/pledges" element={<PrintPage>
+            <ManagePledgesList print />
+          </PrintPage>} />
+        </Routes>
       </BrowserRouter>
       <ToastContainer />
     </>

@@ -80,6 +80,17 @@ const getMe = asyncHandler(async (req, res) => {
     res.status(200).json(req.user)
 })
 
+const getUsers = asyncHandler(async (req, res) => {
+
+    if (!req.user.is_admin) {
+        res.status(403)
+        throw new Error(`${errors['403']} ${errors.invalid}`)
+    }
+
+    const users = await User.find()
+    res.status(200).json(users)
+})
+
 const makeAdmin = asyncHandler(async (req, res) => {
     const secret = process.env.SUPERADMIN_KEY
     const id = req.params.id
@@ -115,4 +126,5 @@ module.exports = {
     loginUser,
     makeAdmin,
     getMe,
+    getUsers,
 }

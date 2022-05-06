@@ -210,3 +210,56 @@ button.secondary {
 .bulk-loader {
   margin-bottom: 3em;
 }
+
+.tablerow {
+  display: grid;
+  /* grid-template-columns: auto auto auto auto auto auto auto auto; */
+
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--background-dark);
+}
+
+table td, table th {
+  margin: 0;
+  padding:0.3em;
+  border: 1px solid var(--background-dark);
+}
+
+table th {
+  background-color: var(--primary-teal);
+}
+
+table tr:nth-child(2n) {
+  background-color: var(--background-light);
+}
+
+table tr.new-section {
+  border-top: 5px solid #1a1a1a;
+}
+
+.print {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: white;
+}
+
+.tools {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.manage-item-list input[type=checkbox] {
+  height: 1.4em;
+  width: 1.4em;
+  float:right;
+}

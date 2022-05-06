@@ -10,6 +10,17 @@ const getPledges = asyncHandler(async (req, res) => {
     res.status(200).json(pledges)
 })
 
+const getAllPledges = asyncHandler(async (req, res) => {
+
+    if (!req.user.is_admin) {
+        res.status(403)
+        throw new Error(`${errors['403']} ${errors.invalid}`)
+    }
+
+    const pledges = await Pledge.find()
+    res.status(200).json(pledges)
+})
+
 const setPledge = asyncHandler(async (req, res) => {
     if (!req.body.item || !req.body.amount) {
         res.status(400)
@@ -118,6 +129,7 @@ const removeItemPledge = asyncHandler(async (pledge) => {
 
 module.exports = {
     getPledges,
+    getAllPledges,
     setPledge,
     updatePledge,
     deletePledge,

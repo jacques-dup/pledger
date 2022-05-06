@@ -22,6 +22,12 @@ const getPledges = async (token) => {
     return response.data
 }
 
+const getAllPledges = async (token) => {
+    const config = makeAuthHeaderConfig(token)
+    const response = await axios.get(URL + "/all", config)
+    return response.data
+}
+
 const deletePledge = async (pledgeId, token) => {
     const config = makeAuthHeaderConfig(token)
     const response = await axios.delete(URL + pledgeId, config)
@@ -33,6 +39,7 @@ const pledgeService = {
     createPledge,
     editPledge,
     getPledges,
+    getAllPledges,
     deletePledge,
 }
 

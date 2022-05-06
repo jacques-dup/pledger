@@ -1,66 +1,126 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getItems } from "../features/item/itemSlice";
-import { ManageViewItem, EditItemPopup, DeletePopup, BulkUploader } from '../components'
+import { Link, useNavigate } from 'react-router-dom'
+import { FaCheckCircle, FaPrint } from 'react-icons/fa'
+import { getAllPledges } from "../features/pledge/pledgeSlice";
+import { getUsers } from '../features/auth/authSlice';
+import { getItems } from '../features/item/itemSlice'
 
-export const ManagePledgesList = () => {
 
-    const [ showEdit, setShowEdit ] = useState({})
+export const ManagePledgesList = ({ print }) => {
+
+    const [ data, setData ] = useState([])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
     
+    const { allPledges, isLoading } = useSelector((state) => state.pledges)
+    const { allUsers } = useSelector((state) => state.auth)
     const { items } = useSelector((state) => state.items)
-    const { user } = useSelector((state) => state.auth)
-    const { pledges } = useSelector((state) => state.pledges)
 
-    const onClick = (e) => {
-        e.preventDefault()
-        const elementIndex = e.target.id
-        setShowEdit({[elementIndex]: true})
+    const mapPledges = () => {
+        if (!allPledges || !allUsers | !items) {
+            return []
+        }
+        let previous
+        return allPledges.reduce( (acc, pledge) => {
+            const user = allUsers.find(u => u._id === pledge.user)
+            const item = items.find(i => i._id === pledge.item)
+
+            let userObj = {
+                user: user.name,
+                email: user.email,
+                phone: user.phone,
+                item: item.name,
+                amount: pledge.amount,
+                isNewUser: false
+            }
+
+            if (previous != user.email) {
+                previous = user.email
+                userObj.isNewUser = true
+            }
+
+            acc.push(userObj)
+            return acc
+        }, [])
     }
-    const onChange = (e) => {
-        const elementIndex = e.target.id
-        setShowEdit({[elementIndex]: false})
+
+    const onClickPrint = (e) => {
+        e.preventDefault()
+        navigate('/print/pledges')
     }
 
     useEffect(() => {
+        dispatch(getAllPledges())
+        dispatch(getUsers())
         dispatch(getItems())
-    }, [showEdit])
+    }, [])
 
-    if (!items.length > 0) {
+    useEffect(() => {
+        setData(mapPledges())
+    }, [allPledges, allUsers, items])
+
+    if (isLoading) {
+        return <h1>Loading</h1>
+    }
+
+    if (!allPledges.length) {
         return <p>Empty</p>
     }
 
     return (
         <div>
-            <div className="bulk-tools">
-                {/* <BulkUploader /> */}
-            </div>
+            {
+                !print &&
+                <div className="tools">
+                    <button className="ui button primary" onClick={onClickPrint}><FaPrint /></button>
+                </div>
+            }
 
             <div className="manage-item-list">
-                <h2>All Items</h2>
-                <ul>
+                <h2>All Pledges</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Pledge item</th>
+                        <th>Qty.</th>
+                        <th><FaCheckCircle style={{color: 'green', height: '1.5em', width: '1.5em'}}/></th>
+                    </tr>
+                    </thead>
+                    <tbody>
                 {
-                    items.map( (item, index) => {
+                    data.map( (listing, index) => {
+                        console.log('listing', listing)
                         return (
-                            <li key={item.name}>
-                                <ManageViewItem data={item}>
-                                    <button className="ui primary button" id={`edit-${index}`} onClick={onClick}>
-                                        Edit
-                                    </button>
-                                    <button className="ui secondary button" id={`delete-${index}`} onClick={onClick}>
-                                        Delete
-                                    </button>
-                                    <EditItemPopup item={item} index={`edit-${index}`} show={showEdit} callback={onChange}/>
-                                    <DeletePopup item={item} index={`delete-${index}`} show={showEdit} callback={onChange}/>
-                                </ManageViewItem>
-                            </li>
+                            <tr key={`listing-${index}`} className={listing.isNewUser ? 'new-section' : ''}>
+                                <td className="tablecell">
+                                    {listing.user}
+                                </td>
+                                <td className="tablecell">
+                                    {listing.email}
+                                </td>
+                                <td className="tablecell">
+                                    {listing.phone}
+                                </td>
+                                <td className="tablecell">
+                                    {listing.item}
+                                </td>
+                                <td className="tablecell">
+                                    {listing.amount}
+                                </td>
+                                <td className="tablecell">
+                                    <input type="checkbox" />
+                                </td>
+                            </tr>
                         )
                     })
                 }
-                </ul>
+                </tbody>
+                </table>
             </div>
         </div>
     )

@@ -3,6 +3,7 @@ import pledgeService from './pledgeService'
 
 const initialState = {
     pledges: [],
+    allPledges: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -42,11 +43,27 @@ export const editPledge = createAsyncThunk(
 )
 
 export const getPledges = createAsyncThunk(
-    'pledges/getAll',
+    'pledges/getMine',
     async (_, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
             return await pledgeService.getPledges(token)
+        } catch (error) {
+            const message =
+                (error.response?.data?.message) ||
+                error.message ||
+                error.toString()
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+export const getAllPledges = createAsyncThunk(
+    'pledges/getAll',
+    async (_, thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await pledgeService.getAllPledges(token)
         } catch (error) {
             const message =
                 (error.response?.data?.message) ||
@@ -116,6 +133,19 @@ export const pledgeSlice = createSlice({
                 state.pledges = action.payload
             })
             .addCase(getPledges.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
+            })
+            .addCase(getAllPledges.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getAllPledges.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.allPledges = action.payload
+            })
+            .addCase(getAllPledges.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.message = action.payload
