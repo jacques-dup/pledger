@@ -13,7 +13,7 @@ export const ProgressBar = ({ current, total, size = 'medium', type}) => {
         <div className={`ui progress active indicating ${size}`} data-percent={progress}>
             <div className="bar" style={{width: `${progress}%`}} >
                 <div className="progress">
-                    <span style={progress < 5 ? smallNumberStyle : {}}>
+                    <span style={progress < 10 ? smallNumberStyle : {}}>
                         {type === 'progress'
                         ?
                             <span>{progress.toFixed(1)}%</span>
