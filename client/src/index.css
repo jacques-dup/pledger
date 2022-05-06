@@ -171,3 +171,42 @@ button.secondary {
 .form.heading p {
   text-align: justify;
 }
+
+.manage-item-list ul {
+  list-style-type: none;
+}
+
+.manage-item-list ul li {
+  margin:0;
+  padding:0;
+}
+
+.manage-item-list ul .item {
+  display: flex;
+  flex-direction: row;
+  line-height: 1em;
+  align-items: center;
+}
+
+.manage-item-list .options {
+  font-style: italic;
+  float: right;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.manage-item-list .options .status {
+  display: flex;
+  flex-direction: row;
+  margin-right: 1em;
+}
+
+.manage-item-list .options .status span {
+  font-size: large;
+  margin-left: 0.5em;
+}
+
+.bulk-loader {
+  margin-bottom: 3em;
+}

@@ -1,4 +1,3 @@
-
 export const ProgressBar = ({ current, total, size = 'medium'}) => {
 
     current = !isNaN(current) ? current : 0

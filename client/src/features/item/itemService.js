@@ -25,7 +25,7 @@ const getItems = async (token) => {
     const flattened = sorted.reduce( (acc, item) => {
 
         if (!previousCategory || previousCategory !== item.category) {
-            acc.push({name: item.category, isHeading:true, _id: item.category})
+            acc.push({name: item.category, isHeading:true, _id: item.category, total_needed: 0, total_pledged: 0})
             previousCategory = item.category
         }
         acc.push(item)

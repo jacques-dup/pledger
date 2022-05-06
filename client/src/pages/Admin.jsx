@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { Tab } from 'semantic-ui-react'
+import { ManageItemList } from '../components'
 
 export const Admin = () => {
 
@@ -10,11 +12,25 @@ export const Admin = () => {
     const { items } = useSelector((state) => state.items)
     const { pledges } = useSelector((state) => state.pledges)
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!user?.is_admin) {
             navigate('/')
         }
     }, [user])
+
+
+    const panes = [
+        {
+            menuItem: 'Manage Item List',
+            render: () => <Tab.Pane attached={false}>
+                <ManageItemList />
+            </Tab.Pane>,
+        },
+        {
+            menuItem: 'Manage Pledges',
+            render: () => <Tab.Pane attached={false}>Manage Pledges</Tab.Pane>,
+        },
+    ]
 
     return (
         <>
@@ -25,16 +41,7 @@ export const Admin = () => {
                 </div>
 
                 <div className="content">
-                    <div className=" ui pointing secondary menu options">
-                        <ul>
-                            <li className="item">Items</li>
-                            <li className="item">Pledges</li>
-                            <li className="item">Users</li>
-                        </ul>
-                    </div>
-                    <div className={`ui segment tab ${true ? 'active' : ''}`}>
-                        stuff
-                    </div>
+                    <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
                 </div>
             </div>
         </>

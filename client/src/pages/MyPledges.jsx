@@ -53,7 +53,15 @@ export const MyPledges = () => {
     }
 
     if (myPledges.length < 1) {
-        return <h2>Loading</h2>
+        return (
+            <div>
+                <div className="header">
+                    <Link to={'/'}>Back</Link>
+                    <h2>My Pledges</h2>
+                </div>
+                <h2>You have no pledges.</h2>
+            </div>
+        )
     }
 
     return (

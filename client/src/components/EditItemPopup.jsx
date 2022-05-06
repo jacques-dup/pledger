@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { FaWindowClose } from 'react-icons/fa'
 import { useDispatch } from 'react-redux'
 import { editItem } from '../features/item/itemSlice'
-import { editPledge } from '../features/pledge/pledgeSlice'
 
 export const EditItemPopup = ({ item, index, show, callback }) => {
 
