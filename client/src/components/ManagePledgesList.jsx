@@ -5,6 +5,7 @@ import { FaCheckCircle, FaPrint } from 'react-icons/fa'
 import { getAllPledges } from "../features/pledge/pledgeSlice";
 import { getUsers } from '../features/auth/authSlice';
 import { getItems } from '../features/item/itemSlice'
+import { sortByProp } from '../utils/data'
 
 
 export const ManagePledgesList = ({ print }) => {
@@ -22,11 +23,9 @@ export const ManagePledgesList = ({ print }) => {
         if (!allPledges || !allUsers | !items) {
             return []
         }
-        let previous
-        return allPledges.reduce( (acc, pledge) => {
+        const rawPledges = allPledges.reduce( (acc, pledge) => {
             const user = allUsers.find(u => u._id === pledge.user)
             const item = items.find(i => i._id === pledge.item)
-
             let userObj = {
                 user: user.name,
                 email: user.email,
@@ -35,15 +34,19 @@ export const ManagePledgesList = ({ print }) => {
                 amount: pledge.amount,
                 isNewUser: false
             }
-
-            if (previous != user.email) {
-                previous = user.email
-                userObj.isNewUser = true
-            }
-
             acc.push(userObj)
             return acc
         }, [])
+
+        const byName = rawPledges.sort(sortByProp('user'))
+        let previous
+        return byName.map((pledge) => {
+            if (previous != pledge.email) {
+                previous = pledge.email
+                pledge.isNewUser = true
+            }
+            return pledge
+        })
     }
 
     const onClickPrint = (e) => {
