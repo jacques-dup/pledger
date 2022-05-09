@@ -263,3 +263,20 @@ table tr.new-section {
   width: 1.4em;
   float:right;
 }
+
+@media only screen and (max-width: 550px){
+  .container .ui.header {
+    flex-direction: column;
+  }
+  .container .ui.header ul li a {
+    font-size: larger;
+    line-height: 1.5rem;
+  }
+  .item {
+    font-size: larger;
+  }
+  .item .ui.progress.active.indicating.medium, .item .buttons .button {
+    font-size: larger;
+    line-height: 1.5rem;
+  }
+}
