@@ -264,6 +264,10 @@ table tr.new-section {
   float:right;
 }
 
+.load-segment {
+  height: 15em;
+}
+
 @media only screen and (max-width: 550px){
   .container .ui.header {
     flex-direction: column;

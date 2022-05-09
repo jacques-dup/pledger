@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaEdit, FaHeart } from 'react-icons/fa'
 import { getItems } from "../features/item/itemSlice";
 import { getPledges } from '../features/pledge/pledgeSlice';
-import { Item, ProgressBar, EditItemPopup, EditPledgePopup } from '../components'
+import { Item, ProgressBar, EditItemPopup, EditPledgePopup, Loader } from '../components'
 
 const calculateTotals = (items) => {
     return items.reduce((acc, item) => {
@@ -22,7 +22,7 @@ export const Home = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const { items } = useSelector((state) => state.items)
+    const { items, isLoading } = useSelector((state) => state.items)
     const { user } = useSelector((state) => state.auth)
     const { pledges } = useSelector((state) => state.pledges)
 
@@ -56,12 +56,12 @@ export const Home = () => {
         setTotals(calculateTotals(items))
     }, [items, showEdit])
 
-    useEffect(() => {
-
-    })
+    if (isLoading) {
+        return <Loader />
+    }
 
     if (items.length < 1 || totals === {}) {
-        return <h2>Loading</h2>
+        return <h2>Unable to fetch items, please try again later</h2>
     }
 
     return (

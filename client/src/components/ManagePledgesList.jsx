@@ -6,6 +6,7 @@ import { getAllPledges } from "../features/pledge/pledgeSlice";
 import { getUsers } from '../features/auth/authSlice';
 import { getItems } from '../features/item/itemSlice'
 import { sortByProp } from '../utils/data'
+import  { Loader } from '../components'
 
 
 export const ManagePledgesList = ({ print }) => {
@@ -65,7 +66,7 @@ export const ManagePledgesList = ({ print }) => {
     }, [allPledges, allUsers, items])
 
     if (isLoading) {
-        return <h1>Loading</h1>
+        return <Loader />
     }
 
     if (!allPledges.length) {

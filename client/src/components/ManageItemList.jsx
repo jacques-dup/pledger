@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { getItems } from "../features/item/itemSlice";
-import { ManageViewItem, EditItemPopup, DeletePopup, BulkUploader } from '../components'
+import { ManageViewItem, EditItemPopup, DeletePopup, Loader } from '../components'
 
 export const ManageItemList = () => {
 
@@ -9,7 +9,7 @@ export const ManageItemList = () => {
 
     const dispatch = useDispatch()
     
-    const { items } = useSelector((state) => state.items)
+    const { items, isLoading } = useSelector((state) => state.items)
 
     const onClick = (e) => {
         e.preventDefault()
@@ -24,6 +24,10 @@ export const ManageItemList = () => {
     useEffect(() => {
         dispatch(getItems())
     }, [showEdit])
+
+    if (isLoading) {
+        return <Loader />
+    }
 
     if (!items.length > 0) {
         return <p>Empty</p>
