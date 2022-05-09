@@ -283,4 +283,7 @@ table tr.new-section {
     font-size: larger;
     line-height: 1.5rem;
   }
+  .manage-item-list.pledges {
+    overflow-x: scroll;
+  }
 }

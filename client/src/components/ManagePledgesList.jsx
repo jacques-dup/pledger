@@ -82,7 +82,7 @@ export const ManagePledgesList = ({ print }) => {
                 </div>
             }
 
-            <div className="manage-item-list">
+            <div className="manage-item-list pledges">
                 <h2>All Pledges</h2>
                 <table>
                     <thead>
