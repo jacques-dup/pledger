@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const whitelist = ['https://commonground-pledger.herokuapp.com']
+const whitelist = [process.env.CLIENT_URL]
 if (process.env.NODE_ENV !== 'production') {
     whitelist.push('http://localhost:3000')
 }
