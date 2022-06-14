@@ -15,7 +15,7 @@ This is a MERN stack.
 ## Setup
 
   - Create a `.env` file, using the `example_env` as a base.
-  - In the rot do `npm install`
+  - In the root do `npm install`
   - In `/client` do `npm install`
   - Serve client locally from root with `npm run client`
   - Serve server from root with `npm run dev`
