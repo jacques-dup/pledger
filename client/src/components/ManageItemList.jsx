@@ -36,7 +36,6 @@ export const ManageItemList = () => {
     return (
         <div>
             <div className="bulk-tools">
-                {/* <BulkUploader /> */}
             </div>
             <div className="manage-item-list">
                 <h2>All Items</h2>

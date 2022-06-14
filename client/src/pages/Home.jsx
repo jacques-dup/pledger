@@ -56,10 +56,6 @@ export const Home = () => {
         setTotals(calculateTotals(items))
     }, [items, showEdit])
 
-    if (isLoading) {
-        return <Loader />
-    }
-
     if (items.length < 1 || totals === {}) {
         return <h2>Unable to fetch items, please try again later</h2>
     }
